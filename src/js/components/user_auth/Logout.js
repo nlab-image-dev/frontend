@@ -15,7 +15,7 @@ export default class Logout extends Component {
           <div>
             <h2>ログアウトしました</h2>
             <div className="text-center">
-              <Link to="/login">ログイン画面へ</Link>
+              <Link to="/">メイン画面へ</Link>
             </div>
           </div>
         </Row>

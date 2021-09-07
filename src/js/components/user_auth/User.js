@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 class User {
     isLoggedIn = () => this.get('isLoggedIn') === 'true';
   
@@ -14,10 +16,22 @@ class User {
     };
   
     login = async (email, password) => {
-  
+      const user = {
+        name: email,
+        password: password
+      };
+
       // ログイン処理
       // ログインエラー時には、falseを返してもいいし、returnを別の用途で利用したかったら
       // 例外を出しして呼び出し元でcatchしてもいいかと思います。
+      axios.get("http://localhost:18080", {user})
+      .then((response) => {
+        // 返ってきたJsonを見てログインの可否を判断
+
+      })
+      .catch((err) => {
+        // return false;
+      });
   
       this.set('isLoggedIn', true);
   

@@ -17,7 +17,7 @@ export default class AuthArea extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Login} />
           <Route exact path="/logout" component={Logout} />
           <Auth>
             <Switch>
