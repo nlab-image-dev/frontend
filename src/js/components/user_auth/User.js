@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 class User {
+
     isLoggedIn = () => this.get('isLoggedIn') === 'true';
   
     set = (key, value) => localStorage.setItem(key, value);
@@ -14,28 +15,57 @@ class User {
       }
       return null;
     };
-  
-    login = async (email, password) => {
-      const user = {
-        name: email,
+
+    regist = async (email, password) => {
+      const config = {
+        headers:{
+          'Content-Type': "application/json"
+        }
+      };
+      const data = {
+        username: email,
         password: password
       };
 
-      // ログイン処理
-      // ログインエラー時には、falseを返してもいいし、returnを別の用途で利用したかったら
-      // 例外を出しして呼び出し元でcatchしてもいいかと思います。
-      axios.get("http://localhost:18080", {user})
+      axios.post("https://nlab-image-dev.herokuapp.com/api/signup/", data, config)
       .then((response) => {
-        // 返ってきたJsonを見てログインの可否を判断
-
+        // 返ってきたJsonを見てユーザー作成の可否判断
+        if (response.status === 201){
+          return true;
+        }else{
+          return false;
+        }
       })
       .catch((err) => {
-        // return false;
+        return false;
       });
+    };
   
-      this.set('isLoggedIn', true);
-  
-      return true;
+    login = async (email, password) => {
+      const config = {
+        headers:{
+          'Content-Type': "application/json"
+        }
+      };
+      const data = {
+        username: email,
+        password: password
+      };
+
+      axios.post("https://nlab-image-dev.herokuapp.com/api/login/", data, config)
+      .then((response) => {
+        // 返ってきたJsonを見てログインの可否を判断
+        console.log(response)
+        if (response.status === 200){
+          this.set('isLoggedIn', true);
+          return true;
+        }else{
+          return false;
+        }
+      })
+      .catch((err) => {
+        return false;
+      });
     };
   
     logout = async () => {

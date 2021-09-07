@@ -8,20 +8,35 @@ class Login extends Component {
     super(props);
 
     this.state = {
+			registUser: false,
       email: '',
       password: '',
       errMessage: '',
     };
+		this.registUserChange = this.registUserChange.bind(this)
   }
 
-  click = async () => {
-    try {
-      await User.login(this.state.email, this.state.password);
+	registUserChange(){
+		this.setState({
+      registUser: !this.state.registUser,
+    });
+	}
 
-      this.props.history.push({ pathname: 'list1' });
-    } catch (e) {
-      this.setState({ errMessage: 'メールアドレスかパスワードが違います' });
-    }
+  click = async () => {
+		if (this.state.registUser){
+			try {
+				await User.regist(this.state.email, this.state.password);
+			} catch (e) {
+				this.setState({ errMessage: '既に使われているユーザー名です' });
+			}
+		}
+		try {
+			await User.login(this.state.email, this.state.password);
+			this.props.history.push({ pathname: 'list1' });
+		} catch (e) {
+			this.setState({ errMessage: 'メールアドレスかパスワードが違います' });
+		}
+		
   };
 
   handleChange = e => {
@@ -29,6 +44,9 @@ class Login extends Component {
   };
 
   render() {
+		const isRegist = (this.state.registUser ? '新規登録' : 'ログイン');
+		const ReverseisRegist = (this.state.registUser ? 'ログイン' : '新規登録');
+
     return (
       <Container className="center">
         <Row className="justify-content-md-center">
@@ -37,7 +55,10 @@ class Login extends Component {
               <Alert variant="danger">{this.props.message}</Alert>
             )}
             <p>
-              <b>ログイン</b>
+              <b>{isRegist}</b>
+							<Button variant="primary" type="button" onClick={this.registUserChange}>
+								{ReverseisRegist}はこちら
+            	</Button>
             </p>
             <Form.Group controlId="email">
               <Form.Label>メールアドレス</Form.Label>
@@ -58,7 +79,7 @@ class Login extends Component {
               />
             </Form.Group>
             <Button variant="primary" type="button" onClick={this.click}>
-              ログイン
+              {isRegist}
             </Button>
           </Form>
         </Row>
