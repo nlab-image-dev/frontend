@@ -8,9 +8,7 @@ import { LoginUser, CreateUser } from '../../actions/userAction';
 
 function Login () {
   const [registUser, setRegistUser] = useState(false);
-  const	registUserChange = () =>{
-    setRegistUser(() => !registUser);
-  };
+  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   
@@ -19,11 +17,23 @@ function Login () {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const error = useSelector((state) => state.userReducer.error);
+  const cError = useSelector((state) => state.userReducer.createError);
+  const lError = useSelector((state) => state.userReducer.loginError);
   let message = "";
-  if(error !== null){
+  
+  if(cError !== null){
+    message = "既に使われているユーザー名です";
+  }
+  if(lError !== null){
     message = "ユーザー名かパスワードが異なります";
   }
+  const	registUserChange = () =>{
+    setRegistUser(() => !registUser);
+    dispatch({type: "ERROR_RESET"})
+    message = "";
+    setUsername("");
+    setPassword("");
+  };
 
   const click = () => {
     if(registUser){
@@ -32,12 +42,6 @@ function Login () {
       dispatch(LoginUser(username, password, history))
     }
   }
-
-  // useEffect(() => {
-  //   if(fetched){
-  //     history.push('/');
-  //   }
-  // },[fetched])
   
   return (
     <Container className="center">

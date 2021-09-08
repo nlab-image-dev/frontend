@@ -20,12 +20,12 @@ export function LoginUser(username, password, history) {
       })
       .catch((err) => {
         dispatch({type: "LOGIN_USER_REJECTED", payload: err})
-        history.push('login');
+        history.push('/login');
       });
   };
 }
 
-export function CreateUser(username, password){
+export function CreateUser(username, password, history){
   return function(dispatch) {
     dispatch({type: "CREATE_START"});
     const config = {
@@ -40,7 +40,7 @@ export function CreateUser(username, password){
     axios.post("https://nlab-image-dev.herokuapp.com/api/signup/", data, config)
     .then((response) => {
       dispatch({type: "CREATE_USER_FULFILLED", username: username,})
-      dispatch(LoginUser(username, password));
+      dispatch(LoginUser(username, password, history));
     })
     .catch((err) => {
       dispatch({type: "CREATE_USER_REJECTED", payload: err})

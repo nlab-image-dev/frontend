@@ -5,7 +5,8 @@ export default function reducer(state={
     },
     fetching: false,
     fetched: false,
-    error: null,
+    createError: null,
+    loginError: null
   }, action) {
 
     switch (action.type) {
@@ -13,7 +14,7 @@ export default function reducer(state={
         return {...state, fetching: true};
       }
       case "LOGIN_USER_REJECTED": {
-        return {...state, fetching: false, error: action.payload};
+        return {...state, fetching: false, loginError: action.payload, createError: null,};
       }
       case "LOGIN_USER_FULFILLED": {
         return {
@@ -23,14 +24,15 @@ export default function reducer(state={
           user: {
             username: action.username,
             token: action.token
-          }
+          },
+          loginError: null
         };
       }
       case "CREATE_USER_START": {
         return {...state, fetching: true};
       }
       case "CREATE_USER_REJECTED": {
-        return {...state, fetching: false, error: action.payload};
+        return {...state, fetching: false, createError: action.payload, loginError: null};
       }
       case "CREATE_USER_FULFILLED": {
         return {
@@ -39,7 +41,8 @@ export default function reducer(state={
           fetched: false,
           user: {
             username: action.username,
-          }
+          },
+          createError: null
         };
       }
       case "LOGOUT": {
@@ -51,6 +54,13 @@ export default function reducer(state={
             username: "",
             token: ""
           }
+        };
+      }
+      case "ERROR_RESET": {
+        return {
+          ...state,
+          createError: null,
+          loginError: null
         };
       }
     }
