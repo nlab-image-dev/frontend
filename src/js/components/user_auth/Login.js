@@ -7,30 +7,47 @@ import { LoginUser, CreateUser } from '../../actions/userAction';
 
 
 function Login () {
-	const [registUser, setRegistUser] = useState(false);
-	const	registUserChange = () =>{
-		setRegistUser(() => !registUser);
-	};
-	const [username, setUsername] = useState("");
-	const [password, setPassword] = useState("");
-	
-	const isRegist = (registUser ? '新規登録' : 'ログイン');
-	const ReverseisRegist = (registUser ? 'ログイン' : '新規登録');
+  const [registUser, setRegistUser] = useState(false);
+  const	registUserChange = () =>{
+    setRegistUser(() => !registUser);
+  };
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  
+  const isRegist = (registUser ? '新規登録' : 'ログイン');
+  const ReverseisRegist = (registUser ? 'ログイン' : '新規登録');
 
-	const dispatch = useDispatch();
-	const history = useHistory();
+  const dispatch = useDispatch();
+  const history = useHistory();
   const fetched = useSelector((state) => state.userReducer.fetched);
 
-	const click = () => {
+  const click = () => {
     if(registUser){
       dispatch(CreateUser(username, password));
+    }else{
+      dispatch(LoginUser(username, password, history))
     }
-		dispatch(LoginUser(username, password));
-	}
+  }
+
+
+  // const click = () => {
+  //   if(registUser){
+  //     dispatch(CreateUser(username, password));
+  //   }
+  // 	dispatch(LoginUser(username, password));
+  // }
+
+  // const click = () => {
+  //   return async (dispatch) => {
+  //     console.log("in click");
+  //     const ds = await dispatch(LoginUser(username, password));
+  //     history.push('/list1');
+  //   };
+  // };
 
   useEffect(() => {
     if(fetched){
-      history.push('/list1');
+      history.push('/');
     }
   },[fetched])
   
@@ -40,9 +57,9 @@ function Login () {
         <Form>
           <p>
             <b>{isRegist}</b>
-						<Button variant="primary" type="button" onClick={registUserChange}>
-							{ReverseisRegist}はこちら
-          	</Button>
+            <Button variant="primary" type="button" onClick={registUserChange}>
+              {ReverseisRegist}はこちら
+            </Button>
           </p>
           <Form.Group controlId="email">
             <Form.Label>メールアドレス</Form.Label>

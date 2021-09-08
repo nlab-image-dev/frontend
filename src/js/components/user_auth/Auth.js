@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 function Auth ({children}) {
   const userFetched = useSelector((state) => state.userReducer.fetched);
-  console.log(userFetched)
   if (!userFetched) {
     return <></>
   } else {

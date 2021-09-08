@@ -16,11 +16,9 @@ export function LoginUser(username, password) {
     axios.post("https://nlab-image-dev.herokuapp.com/api/login/", data, config)
     .then((response) => {
         dispatch({type: "LOGIN_USER_FULFILLED", username: username, token: response.data})
-        console.log(response)
       })
       .catch((err) => {
         dispatch({type: "LOGIN_USER_REJECTED", payload: err})
-      	console.log("miss");
       });
   };
 }
@@ -28,7 +26,6 @@ export function LoginUser(username, password) {
 export function CreateUser(username, password){
   return function(dispatch) {
     dispatch({type: "CREATE_START"});
-  
     const config = {
       headers:{
         'Content-Type': "application/json"
@@ -37,14 +34,14 @@ export function CreateUser(username, password){
     const data = {
       username: username,
       password: password
-    };
-  
+    }
     axios.post("https://nlab-image-dev.herokuapp.com/api/signup/", data, config)
     .then((response) => {
       dispatch({type: "CREATE_USER_FULFILLED", username: username,})
+      dispatch(LoginUser(username, password));
     })
     .catch((err) => {
-      dispatch({type: "LOGIN_USER_REJECTED", payload: err})
+      dispatch({type: "CREATE_USER_REJECTED", payload: err})
     });
   };
 }

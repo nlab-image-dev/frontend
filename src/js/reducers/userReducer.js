@@ -1,7 +1,7 @@
 export default function reducer(state={
     user: {
       username: 'test_user',
-			token: 'test_token'
+      token: 'test_token'
     },
     fetching: false,
     fetched: false,
@@ -21,12 +21,12 @@ export default function reducer(state={
           fetching: false,
           fetched: true,
           user: {
-						username: action.username,
-						token: action.token
-					}
+            username: action.username,
+            token: action.token
+          }
         };
       }
-			case "CREATE_USER_START": {
+      case "CREATE_USER_START": {
         return {...state, fetching: true};
       }
       case "CREATE_USER_REJECTED": {
@@ -38,21 +38,21 @@ export default function reducer(state={
           fetching: false,
           fetched: false,
           user: {
-						username: action.username,
-					}
+            username: action.username,
+          }
         };
       }
-			case "LOGOUT": {
-				return {
+      case "LOGOUT": {
+        return {
           ...state,
           fetching: false,
           fetched: false,
           user: {
-						username: "",
-						token: ""
-					}
+            username: "",
+            token: ""
+          }
         };
-			}
+      }
     }
 
     return state;
