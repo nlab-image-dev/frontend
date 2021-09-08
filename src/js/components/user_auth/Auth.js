@@ -1,8 +1,15 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import User from './User';
+import { useSelector } from "react-redux";
 
-const Auth = props =>
-  User.isLoggedIn() ? props.children : <Redirect to={'/'} />;
+function Auth ({children}) {
+  const userFetched = useSelector((state) => state.userReducer.fetched);
+  console.log(userFetched)
+  if (!userFetched) {
+    return <></>
+  } else {
+    return children
+  }
+};
 
 export default Auth;

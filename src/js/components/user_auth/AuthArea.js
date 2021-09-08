@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 
 import Auth from './Auth';
-import User from './User';
 import Login from "./Login";
 import Logout from "./Logout";
 import List1 from "./List1";
@@ -17,7 +16,7 @@ export default class AuthArea extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/logout" component={Logout} />
           <Auth>
             <Switch>

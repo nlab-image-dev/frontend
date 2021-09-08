@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import { Container, Button } from 'react-bootstrap';
-import User from './User';
-import { Redirect, Link  } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { LogoutUser } from '../../actions/userAction';
 
-export default class List1 extends Component {
-  render() {
-    return (
-      <Container className="center">Hello Login app list1<br/>
-        <button>
-          <Link to='/logout'>ログアウト</Link>
-        </button>
-      </Container>
-    );
-  }
+function List1 () {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const click = () => {
+		dispatch(LogoutUser());
+		history.push('/logout');
+	}
+  return (
+    <Container className="center">Hello Login app list1<br/>
+      <Button onClick={click}>
+        ログアウト
+      </Button>
+    </Container>
+  );
+  
 }
+export default List1
