@@ -23,33 +23,17 @@ function Login () {
 
   const click = () => {
     if(registUser){
-      dispatch(CreateUser(username, password));
+      dispatch(CreateUser(username, password, history));
     }else{
       dispatch(LoginUser(username, password, history))
     }
   }
 
-
-  // const click = () => {
-  //   if(registUser){
-  //     dispatch(CreateUser(username, password));
+  // useEffect(() => {
+  //   if(fetched){
+  //     history.push('/');
   //   }
-  // 	dispatch(LoginUser(username, password));
-  // }
-
-  // const click = () => {
-  //   return async (dispatch) => {
-  //     console.log("in click");
-  //     const ds = await dispatch(LoginUser(username, password));
-  //     history.push('/list1');
-  //   };
-  // };
-
-  useEffect(() => {
-    if(fetched){
-      history.push('/');
-    }
-  },[fetched])
+  // },[fetched])
   
   return (
     <Container className="center">
