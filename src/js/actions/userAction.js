@@ -20,6 +20,7 @@ export function LoginUser(username, password, history) {
       })
       .catch((err) => {
         dispatch({type: "LOGIN_USER_REJECTED", payload: err})
+        history.push('login');
       });
   };
 }

@@ -19,7 +19,11 @@ function Login () {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const fetched = useSelector((state) => state.userReducer.fetched);
+  const error = useSelector((state) => state.userReducer.error);
+  let message = "";
+  if(error !== null){
+    message = "ユーザー名かパスワードが異なります";
+  }
 
   const click = () => {
     if(registUser){
@@ -40,7 +44,9 @@ function Login () {
       <Row className="justify-content-md-center">
         <Form>
           <p>
-            <b>{isRegist}</b>
+            <b>
+              {isRegist}<br/>
+            </b>
             <Button variant="primary" type="button" onClick={registUserChange}>
               {ReverseisRegist}はこちら
             </Button>
@@ -63,6 +69,9 @@ function Login () {
               value={password}
             />
           </Form.Group>
+          <p>
+            {message}
+          </p>
           <Button variant="primary" type="button" onClick={click}>
             {isRegist}
           </Button>
