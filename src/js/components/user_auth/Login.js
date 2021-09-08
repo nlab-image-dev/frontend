@@ -1,9 +1,9 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Alert } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
-import { useDispatch } from "react-redux";
-import { LoginUser } from '../../actions/userAction';
+import { useDispatch, useSelector } from "react-redux";
+import { LoginUser, CreateUser } from '../../actions/userAction';
 
 
 function Login () {
@@ -19,11 +19,21 @@ function Login () {
 
 	const dispatch = useDispatch();
 	const history = useHistory();
+  const fetched = useSelector((state) => state.userReducer.fetched);
+
 	const click = () => {
+    if(registUser){
+      dispatch(CreateUser(username, password));
+    }
 		dispatch(LoginUser(username, password));
-		history.push('/list1');
 	}
 
+  useEffect(() => {
+    if(fetched){
+      history.push('/list1');
+    }
+  },[fetched])
+  
   return (
     <Container className="center">
       <Row className="justify-content-md-center">

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LogoutUser } from '../../actions/userAction';
 
 function List1 () {
