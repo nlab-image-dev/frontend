@@ -11,7 +11,10 @@ class Articleoverview extends Component{
             Article:[
                 {
                     title:"サーバーからデータを取得できませんでした。",
-                    user:{ user_ID: 0,username: "NULL" }
+                    user:{ user_ID: 0,username: "NULL" },
+                    tags: [],
+                    text: "",
+                    posted_time: 0,
                 }
             ],
             current: 1, //今表示しているページ
@@ -63,7 +66,7 @@ class Articleoverview extends Component{
                     <div key={list}>
                     <Articlelist
                         title = {item.title}
-                        // tag = {item.tag}
+                        tags = {item.tags}
                         author = {item.user.username}
                         intro = {item.text}
                         date = {Date(item.posted_time)}

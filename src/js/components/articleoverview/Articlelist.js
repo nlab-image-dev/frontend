@@ -4,7 +4,7 @@ import { ListGroup,Container } from "react-bootstrap";
 
 class Articlelist extends Component{
     render() {
-        const { title, author, tag, intro, date } = this.props;
+        const { title, author, tags, intro, date } = this.props;
         return(
             <Container fluid>
                 <ListGroup>
@@ -13,7 +13,11 @@ class Articlelist extends Component{
                             <div className="article-title">{ title }</div>
                             <div className="article-tag">
                                 <span>
-                                    <span className="article-tag">{ tag }</span>
+                                    {tags.map((tag, idx) => {
+                                        return(
+                                            <span className="article-tag">{ tag.tag_name }</span>
+                                        )
+                                    })}
                                 </span>
                             </div>
                         </div>
