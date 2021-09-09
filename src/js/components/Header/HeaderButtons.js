@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
-export default class Header extends React.Component {
+export default class HeaderButtons extends React.Component {
   render() {
     return (
       <div>
@@ -23,9 +23,14 @@ export default class Header extends React.Component {
         </Button>
         <Button 
 					variant="contained" color="primary" component={Link}
-					to="/logout">
-					ログアウト
+					to="/submit">
+					投稿
 				</Button>
+        <Button 
+          variant="contained" color="primary" component={Link}
+          to="/logout">
+          ログアウト
+        </Button>
       </div>
       
     );
