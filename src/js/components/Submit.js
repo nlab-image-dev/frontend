@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import axios from "axios";
 import Header from "./Header";
-import { paperSubmit } from '../actions/submitAction';
+// import { paperSubmit } from '../actions/submitAction';
 import { useDispatch, useSelector } from "react-redux";
 
 import { Form, Button, Container, Row, Alert } from 'react-bootstrap';
@@ -37,13 +37,26 @@ function Submit(){
         console.log(error);//捕获异常数据
     })
 
-    const click = (text,title,) => {
+    const click = (text,title,tags) => {
+        return function() {
         const config = {
             headers:{
                 'Content-Type': "application/json",
-                'Authorization' : "JWT {TOKEN}"
-            }
-    }}
+                'Authorization' : "JWT "+user.token
+            }};
+        const datapost = {
+            title: title,
+            tags:[{id:0, name:"smith"}],
+            text: text
+        }
+        axios.post("https://nlab-image-dev.herokuapp.com/api/article/", data, config)
+        .then((response) => {})
+        .catch(function (error) {
+            console.log(error)
+          });
+        }
+    };
+    
 
     return  (
         <div className="Submit">
@@ -54,8 +67,8 @@ function Submit(){
                 <p>{message}</p>
                     <Form.Group controlId="title">
                         <Form.Label>タグを選んでください</Form.Label>
-                        <Button variant="primary" type="button" onClick={click}> {tag_id.tags[0].name} </Button>
-                        <Button variant="primary" type="button" onClick={click}> {tag_id.tags[1].name} </Button>
+                        <Button variant="primary" type="button" > tag_id.tags[0].name </Button>
+                        <Button variant="primary" type="button" > tag_id.tags[1].name </Button>
                     </Form.Group>
                     <Form.Group controlId="title">
                         <Form.Label>タイトル</Form.Label>
@@ -77,7 +90,7 @@ function Submit(){
                     </Form.Group>
 
                 
-                <Button variant="primary" type="button" onClick={click}> 投稿する </Button>
+                <Button variant="primary" type="button" onClick={click(text,title,tag_id)}> 投稿する </Button>
 
             </Form>
             {/* </Container> */}
