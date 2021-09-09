@@ -19,12 +19,13 @@ export default class NewlineDelete extends React.Component {
   render() {
     return (
       <div>
-        <label>input paper row text</label><br/>
+        <label>論文からコピーしたテキストを入力</label><br/>
         <textarea
+          rows="4" cols="65"
           placeholder="copy text"
           onChange={this.deleteMark}
         /><br/>
-        <label>newline deleted text</label><br/>
+        <label>改行を消したテキスト</label><br/>
         <div>{this.state.text}</div>
       </div>
     );
