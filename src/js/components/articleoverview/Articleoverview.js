@@ -10,8 +10,8 @@ class Articleoverview extends Component{
         this.state = {
             Article:[
                 {
-                    title:"サーバーからデータを取得できませんでした。",
-                    user:{ user_ID: 0,username: "NULL" },
+                    warning:"サーバーからデータを取得できませんでした。",
+                    user:{ user_id: 0,username: "NULL" },
                     tags: [],
                     text: "",
                     posted_time: 0,
@@ -40,6 +40,7 @@ class Articleoverview extends Component{
             }
         );
     };
+    //ページ表示
     componentDidUpdate(){
         if(this.state.totalPage !== Math.ceil(this.state.Article.length/this.state.pageSize)){
             this.setState({
@@ -48,7 +49,7 @@ class Articleoverview extends Component{
             // this.pageNext(this.state.goValue)
         }
     }
-    //ページ分けと表示
+    //ページ分け
     // setPage(num){
     //     this.setState({
     //         Article:this.state.Article.slice(num,num+this.state.pageSize)
