@@ -1,12 +1,13 @@
 import React from "react";
 import Auth from "../user_auth/Auth";
+import Submit from "../Submit";
 
 export default class SubmitPage extends React.Component {
   render() {
     return (
       <Auth>
         <div>
-          <h1>ここは投稿ページ</h1>
+          <Submit />
         </div>
       </Auth>
     );
