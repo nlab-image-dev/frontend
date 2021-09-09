@@ -1,11 +1,12 @@
 import React from "react";
-import AuthArea from "./user_auth/AuthArea";
+import Articleoverview from "./articleoverview/Articleoverview";
+import Header from "./header/header";
 
 function Layout () {  
   return (
     <div>
-      <h1>Welcome!</h1>
-      <AuthArea />
+      <Header />
+      <Articleoverview />
     </div>
   ); 
 }
