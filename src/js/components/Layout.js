@@ -1,10 +1,14 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import DefaulPage from "./DefaultPage";
+import AuthArea from "./user_auth/AuthArea";
 
-export default class Layout extends React.Component {
-  render() {
-    return (
+function Layout () {  
+  return (
+    <div>
       <h1>Welcome!</h1>
-    );
-  }
+      <DefaulPage />
+    </div>
+  ); 
 }
+
+export default Layout;
