@@ -12,6 +12,7 @@ function Submit(){
     const [title,Settitle] =useState("");
     const [tag_id,Settag_id] =useState([{id:0, name:"smith"}]);
     const [message,Setmessage]=useState('Welcome')
+    const [tag,Settag] =useState([1]);
 
     // this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleChange = this.handleChange.bind(this);
@@ -40,7 +41,7 @@ function Submit(){
     }, [])
     
 
-    const click = (text,title,tags) => {
+    const click = (text,title,tag_ids) => {
         return function() {
         const config = {
             headers:{
@@ -49,17 +50,16 @@ function Submit(){
             }};
         const datapost = {
             title: title,
-            tags:[{id:0, name:"smith"}],
+            tag_ids:tag_ids,
             text: text
         }
-        axios.post("https://nlab-image-dev.herokuapp.com/api/article/", data, config)
-        .then((response) => {})
+        axios.post("https://nlab-image-dev.herokuapp.com/api/article/", datapost, config)
+        .then((response) => {Setmessage("投稿しました")})
         .catch(function (error) {
-            console.log(error)
+            console.log(error.response)
           });
         }
     };
-    
 
     return  (
         <div className="Submit">
@@ -73,7 +73,8 @@ function Submit(){
                         {
                             tag_id.map((tag, idx) => {
                                 return(
-                                    <Button variant="primary" type="button" id={idx} onClick={click}> {tag.name} </Button>
+                                    <Button variant="primary" type="button" id={tag.id} onClick={()=>Settag([tag.id])} > {tag.name} </Button>
+                                    
                                 )
                             })
                         }
@@ -99,7 +100,7 @@ function Submit(){
                     </Form.Group>
 
                 
-                <Button variant="primary" type="button" onClick={click(text,title,tag_id)}> 投稿する </Button>
+                <Button variant="danger" type="button" onClick={click(text,title,tag)}> 投稿する </Button>
 
             </Form>
             {/* </Container> */}
