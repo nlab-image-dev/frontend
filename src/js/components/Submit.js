@@ -1,11 +1,10 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import axios from "axios";
 import Header from "./Header";
 import { paperSubmit } from '../actions/submitAction';
 import { useDispatch, useSelector } from "react-redux";
 
 import { Form, Button, Container, Row, Alert } from 'react-bootstrap';
-
 
 
 function Submit(){
@@ -29,13 +28,17 @@ function Submit(){
         // tag_id: tag_id,
         };
 
-    axios.get("https://nlab-image-dev.herokuapp.com/api/tag/", data, config)
-    .then((response)=> {
-        console.log(response.data);
-        Settag_id(JSON.parse(response.data).tags
-        )}).catch(function (error) {
-        console.log(error);//捕获异常数据
-    })
+    useEffect(() => {
+        axios.get("https://nlab-image-dev.herokuapp.com/api/tag/", data, config)
+        .then((response)=> {
+            console.log(JSON.parse(response.data).tags);
+            console.log(tag_id)
+            Settag_id(JSON.parse(response.data).tags)
+        }).catch(function (error) {
+            console.log(error);//捕获异常数据
+        })
+    }, [])
+    
 
     const click = (text,title,) => {
         const config = {
@@ -54,8 +57,14 @@ function Submit(){
                 <p>{message}</p>
                     <Form.Group controlId="title">
                         <Form.Label>タグを選んでください</Form.Label>
-                        <Button variant="primary" type="button" onClick={click}> {tag_id.tags[0].name} </Button>
-                        <Button variant="primary" type="button" onClick={click}> {tag_id.tags[1].name} </Button>
+                        {
+                            tag_id.map((tag, idx) => {
+                                return(
+                                    <Button variant="primary" type="button" id={idx} onClick={click}> {tag.name} </Button>
+                                )
+                            })
+                        }
+                        
                     </Form.Group>
                     <Form.Group controlId="title">
                         <Form.Label>タイトル</Form.Label>
