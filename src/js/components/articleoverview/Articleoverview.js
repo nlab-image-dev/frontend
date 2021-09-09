@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import Articlelist from "./Articlelist";
 import PageButton from "./PageButton";
+import Header from "../header/header";
 
 class Articleoverview extends Component{
     constructor(props){
         super(props);
-        // this.pageNext=this.pageNext.bind(this);
-        // this.setPage=this.setPage.bind(this);
+        this.pageNext=this.pageNext.bind(this);
+        this.setPage=this.setPage.bind(this);
         this.state = {
             Article:[
                 {
@@ -46,26 +47,27 @@ class Articleoverview extends Component{
             this.setState({
                 totalPage:Math.ceil(this.state.Article.length/this.state.pageSize)
             })
-            // this.pageNext(this.state.goValue)
+            this.pageNext(this.state.goValue)
         }
     }
     //ページ分け
-    // setPage(num){
-    //     this.setState({
-    //         Article:this.state.Article.slice(num,num+this.state.pageSize)
-    //     })
-    // }
-    // pageNext (num) {
-    //     this.setPage(num)
-    // }
+    setPage(num){
+        this.setState({
+            Article:this.state.Article.slice(num,num+this.state.pageSize)
+        })
+    }
+    pageNext (num) {
+        this.setPage(num)
+    }
     //frontに記事データを返す
     render(){
         return(
             <div>
-                <br/>
+                <Header />
                 {this.state.Article.map((item,list) =>(
                     <div key={list}>
                     <Articlelist
+                        id = {item.id}
                         title = {item.title}
                         tags = {item.tags}
                         author = {item.user.username}

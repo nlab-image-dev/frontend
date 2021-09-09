@@ -15,7 +15,7 @@ class Articlelist extends Component{
                                 <span>
                                     {tags.map((tag, idx) => {
                                         return(
-                                            <span className="article-tag" kry="idx">{ tag.tag_name }</span>
+                                            <span className="article-tag" key="idx">{ tag.tag_name }</span>
                                         )
                                     })}
                                 </span>
