@@ -13,8 +13,13 @@ export default class HeaderButtons extends React.Component {
         </Button>
         <Button 
           variant="contained" color="primary" component={Link}
+          to="/newlinedelete">
+          改行削除
+        </Button>
+        <Button 
+          variant="contained" color="primary" component={Link}
           to="/login">
-          ログイン
+          ログイン/新規登録
         </Button>
         <Button 
           variant="contained" color="primary" component={Link}
