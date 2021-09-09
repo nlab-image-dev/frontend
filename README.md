@@ -15,5 +15,5 @@ npm install --save-dev @babel/polyfill
 
 また, webpack.config.jsのentryを以下に変更
 ```
- entry: ['@babel/polyfill', './/client.js']
+ entry: ['@babel/polyfill', './js/client.js']
 ```
