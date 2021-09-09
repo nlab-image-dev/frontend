@@ -8,9 +8,7 @@ import { LoginUser, CreateUser } from '../../actions/userAction';
 
 function Login () {
   const [registUser, setRegistUser] = useState(false);
-  const	registUserChange = () =>{
-    setRegistUser(() => !registUser);
-  };
+  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   
@@ -19,44 +17,40 @@ function Login () {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const fetched = useSelector((state) => state.userReducer.fetched);
+  const cError = useSelector((state) => state.userReducer.createError);
+  const lError = useSelector((state) => state.userReducer.loginError);
+  let message = "";
+  
+  if(cError !== null){
+    message = "既に使われているユーザー名です";
+  }
+  if(lError !== null){
+    message = "ユーザー名かパスワードが異なります";
+  }
+  const	registUserChange = () =>{
+    setRegistUser(() => !registUser);
+    dispatch({type: "ERROR_RESET"})
+    message = "";
+    setUsername("");
+    setPassword("");
+  };
 
   const click = () => {
     if(registUser){
-      dispatch(CreateUser(username, password));
+      dispatch(CreateUser(username, password, history));
     }else{
       dispatch(LoginUser(username, password, history))
     }
   }
-
-
-  // const click = () => {
-  //   if(registUser){
-  //     dispatch(CreateUser(username, password));
-  //   }
-  // 	dispatch(LoginUser(username, password));
-  // }
-
-  // const click = () => {
-  //   return async (dispatch) => {
-  //     console.log("in click");
-  //     const ds = await dispatch(LoginUser(username, password));
-  //     history.push('/list1');
-  //   };
-  // };
-
-  useEffect(() => {
-    if(fetched){
-      history.push('/');
-    }
-  },[fetched])
   
   return (
     <Container className="center">
       <Row className="justify-content-md-center">
         <Form>
           <p>
-            <b>{isRegist}</b>
+            <b>
+              {isRegist}<br/>
+            </b>
             <Button variant="primary" type="button" onClick={registUserChange}>
               {ReverseisRegist}はこちら
             </Button>
@@ -79,6 +73,9 @@ function Login () {
               value={password}
             />
           </Form.Group>
+          <p>
+            {message}
+          </p>
           <Button variant="primary" type="button" onClick={click}>
             {isRegist}
           </Button>
