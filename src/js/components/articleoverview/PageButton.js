@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
+import { Button } from "react-bootstrap";
 
 class PageButton extends Component{
     constructor(props){
@@ -39,9 +39,9 @@ class PageButton extends Component{
     render(){
         return(
             <div>
-                <span onClick={ this.setUp }>前のページ</span>
+                <Button onClick={ this.setUp }>前のページ</Button>
                 <span>{ this.state.pagenum }ページ/ { this.props.totalPage }ページ</span>
-                <span onClick={ this.setNext }>次のページ</span>
+                <Button onClick={ this.setNext }>次のページ</Button>
             </div>
         );
     }

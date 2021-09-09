@@ -14,8 +14,6 @@ class Articlelist extends Component{
                             <div className="article-tag">
                                 <span>
                                     <span className="article-tag">{ tag }</span>
-                                    <span className="article-tag">{ tag }</span>
-                                    <span className="article-tag">{ tag }</span>
                                 </span>
                             </div>
                         </div>
