@@ -11,9 +11,10 @@ npm install --save-dev @babel/plugin-proposal-decorators react-redux react-route
 npm install --save-dev babel-plugin-react-html-attrs
 npm install --save-dev react-bootstrap
 npm install --save-dev @babel/polyfill
+npm install "@material-ui/core"
 ```
 
 また, webpack.config.jsのentryを以下に変更
 ```
- entry: ['@babel/polyfill', './src/client.js']
+ entry: ['@babel/polyfill', './js/client.js']
 ```

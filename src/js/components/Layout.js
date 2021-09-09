@@ -1,12 +1,12 @@
 import React from "react";
-import Articleoverview from "./articleoverview/Articleoverview";
-import Header from "./header/header";
+import DefaulPage from "./DefaultPage";
+import AuthArea from "./user_auth/AuthArea";
 
 function Layout () {  
   return (
     <div>
-      <Header />
-      <Articleoverview />
+      <h1>Welcome!</h1>
+      <DefaulPage />
     </div>
   ); 
 }

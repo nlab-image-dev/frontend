@@ -1,25 +1,20 @@
-import React, { Component } from 'react';
+import React, { useEffect  } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import User from './User';
+import { useDispatch　} from "react-redux";
+import { Redirect } from 'react-router-dom';
 
-export default class Logout extends Component {
-  async componentDidMount() {
-    await User.logout();
-  }
+import { Button } from "@material-ui/core";
+import Auth from './Auth';
 
-  render() {
-    return (
-      <Container className="center">
-        <Row className="justify-content-md-center">
-          <div>
-            <h2>ログアウトしました</h2>
-            <div className="text-center">
-              <Link to="/login">ログイン画面へ</Link>
-            </div>
-          </div>
-        </Row>
-      </Container>
-    );
-  }
+function Logout () {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({type: "LOGOUT"});
+  });
+  return (
+    <Redirect to="/"/>
+  );
 }
+
+export default Logout;
