@@ -11,7 +11,7 @@ import { Form, Button, Container, Row, Alert } from 'react-bootstrap';
 function Submit(){
     const [text,Settext] =useState("");
     const [title,Settitle] =useState("");
-    const [tag_id,Settag_id] =useState("");
+    const [tag_id,Settag_id] =useState([{id:0, name:"smith"}]);
     const [message,Setmessage]=useState('Welcome')
 
     // this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,9 +37,13 @@ function Submit(){
         console.log(error);//捕获异常数据
     })
 
-    const click = () => {
-        paperSubmit(title,text,tag_id)
-    }
+    const click = (text,title,) => {
+        const config = {
+            headers:{
+                'Content-Type': "application/json",
+                'Authorization' : "JWT {TOKEN}"
+            }
+    }}
 
     return  (
         <div className="Submit">
@@ -50,8 +54,8 @@ function Submit(){
                 <p>{message}</p>
                     <Form.Group controlId="title">
                         <Form.Label>タグを選んでください</Form.Label>
-                        <Button variant="primary" type="button" onClick={click}> tag_id[0].name </Button>
-                        <Button variant="primary" type="button" onClick={click}> tag_id[1].name </Button>
+                        <Button variant="primary" type="button" onClick={click}> {tag_id.tags[0].name} </Button>
+                        <Button variant="primary" type="button" onClick={click}> {tag_id.tags[1].name} </Button>
                     </Form.Group>
                     <Form.Group controlId="title">
                         <Form.Label>タイトル</Form.Label>
