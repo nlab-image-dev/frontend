@@ -15,7 +15,7 @@ export function LoginUser(username, password, history) {
 
     axios.post("https://nlab-image-dev.herokuapp.com/api/login/", data, config)
     .then((response) => {
-        dispatch({type: "LOGIN_USER_FULFILLED", username: username, token: response.data})
+        dispatch({type: "LOGIN_USER_FULFILLED", username: username, token: response.data.token})
         history.push('/');
       })
       .catch((err) => {
