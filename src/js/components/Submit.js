@@ -4,7 +4,7 @@ import Header from "./Header";
 // import { paperSubmit } from '../actions/submitAction';
 import { useDispatch, useSelector } from "react-redux";
 
-import { Form, Button, Container, Row, Alert } from 'react-bootstrap';
+import { Form, Button, Container, Row, Alert, Badge } from 'react-bootstrap';
 
 
 function Submit(){
@@ -63,47 +63,47 @@ function Submit(){
 
     return  (
         <div className="Submit">
-
-            <Form>
-
-                <Header />
-                <p>{message}</p>
-                    <Form.Group controlId="title">
-                        <Form.Label>タグを選んでください</Form.Label>
-                        {
-                            tag_id.map((tag, idx) => {
-                                return(
-                                    <Button variant="primary" type="button" id={tag.id} onClick={()=>Settag([tag.id])} > {tag.name} </Button>
-                                    
-                                )
-                            })
-                        }
-                        
-                    </Form.Group>
-                    <Form.Group controlId="title">
-                        <Form.Label>タイトル</Form.Label>
-                        <Form.Control
-                        type="title"
-                        placeholder="タイトルを入力してください"
-                        onChange={(e) => { Settitle(e.target.value) }}
-                        value={title}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="text">
-                        <Form.Label>論文内容</Form.Label>
-                        <Form.Control
-                        as="textarea" rows ={5}
-                        placeholder="論文内容を入力してください"
-                        onChange={(e) => { Settext(e.target.value) }}
-                        value={text}
-                        />
-                    </Form.Group>
-
-                
-                <Button variant="danger" type="button" onClick={click(text,title,tag)}> 投稿する </Button>
-
-            </Form>
-            {/* </Container> */}
+            <Container fliud="lg">
+                <Form>
+                    <Header />
+                    <p>{message}</p>
+                        <Form.Group controlId="title">
+                            <Form.Label>タグを選択してください</Form.Label>
+                            {
+                                tag_id.map((tag, idx) => {
+                                    return(
+                                    <Badge>
+                                        <Button size="sm" variant="primary" type="button" id={tag.id} onClick={()=>Settag([tag.id])}>
+                                             {tag.name} 
+                                        </Button>
+                                    </Badge>
+                                    )
+                                })
+                            }
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="title">
+                            <Form.Label>タイトル</Form.Label>
+                            <Form.Control
+                            type="title"
+                            placeholder="タイトルを入力してください"
+                            onChange={(e) => { Settitle(e.target.value) }}
+                            value={title}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="text">
+                            <Form.Label>論文内容</Form.Label>
+                            <Form.Control
+                            as="textarea" rows ={5}
+                            placeholder="論文内容を入力してください"
+                            onChange={(e) => { Settext(e.target.value) }}
+                            value={text}
+                            />
+                        </Form.Group>
+                    <Button variant="danger" type="button" onClick={click(text,title,tag)}> 
+                    投稿する 
+                    </Button>
+                </Form>
+            </Container>
         </div>
     );
 }
