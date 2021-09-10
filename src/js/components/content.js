@@ -143,7 +143,7 @@ function Content(){
                     ctotal.comments.map((te,idx)=>{
                         return(
                             <Container>
-                                ユーザー:{te.user.username}<br/>{te.text}<br/>コメント時間：{new Date(te.posted_time*1000).toLocaleString()}
+                                ユーザー:{te.user.username}<br/>{te.text}<br/>コメント時間：{new Date(te.posted_time*1000).toLocaleString()}<br/>
                             </Container>
                         )
                     }
