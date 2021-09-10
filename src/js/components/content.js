@@ -107,12 +107,12 @@ function Content(){
                 </span> 
                 <Form.Label> <b>投稿時間:</b></Form.Label>
                 <span>
-                    {time}<br/>
+                    {new Date(time*1000).toLocaleString()}<br/>
                 </span>
                 <Form.Label><b>論文タグ:</b></Form.Label>
                 <span>
                     {tag.map((ta, idx) => {
-                                return(ta.tag_name+" "
+                                return(ta.tag_name+"　"
                                 )}
                     )}
                 </span> 
@@ -143,7 +143,7 @@ function Content(){
                     ctotal.comments.map((te,idx)=>{
                         return(
                             <Container>
-                                ユーザー:{te.user.username}<br/>{te.text}<br/>コメント時間：{te.posted_time}
+                                ユーザー:{te.user.username}<br/>{te.text}<br/>コメント時間：{new Date(te.posted_time*1000).toLocaleString()}
                             </Container>
                         )
                     }
