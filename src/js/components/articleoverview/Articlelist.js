@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import { ListGroup,Container } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
 
 class Articlelist extends Component{
     render() {
@@ -8,7 +8,8 @@ class Articlelist extends Component{
         return(
             <Container fluid>
                 <ListGroup>
-                    <ListGroup.Item action href={"/article?id=" + id}>
+                <Link to={"/article?id="+id}>
+                    <ListGroup.Item action>
                             <div className="article-head">
                                 <div className="article-title">{ title }</div>
                                 <div className="article-tag">
@@ -25,6 +26,7 @@ class Articlelist extends Component{
                                 <span>{ author }</span><em>{ date }</em>
                             </div>
                     </ListGroup.Item>
+                    </Link>
                 </ListGroup>
             </Container>
         );
