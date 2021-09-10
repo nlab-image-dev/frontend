@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Articlelist from "./Articlelist";
 import PageButton from "./PageButton";
 import Header from "../header/header";
+import { Container } from "react-bootstrap";
 
 class Articleoverview extends Component{
     constructor(props){
@@ -77,19 +78,20 @@ class Articleoverview extends Component{
         return(
             <div>
                 <Header />
-                {this.state.display_articles.map((item,list) =>(
-                    <div key={list}>
-                    <Articlelist
-                        id = {item.id}
-                        title = {item.title}
-                        tags = {item.tags}
-                        author = {item.user.username}
-                        date = {new Date(item.posted_time*1000).toLocaleString()}
-                    />
-                </div>
-                ))}
-                <PageButton { ...this.state } pageNext={this.pageNext} />
-                <br/>
+                <Container fluid>
+                    {this.state.display_articles.map((item,list) =>(
+                        <div key={list}>
+                        <Articlelist
+                            id = {item.id}
+                            title = {item.title}
+                            tags = {item.tags}
+                            author = {item.user.username}
+                            date = {new Date(item.posted_time*1000).toLocaleString()}
+                        />
+                    </div>
+                    ))}
+                    <PageButton { ...this.state } pageNext={this.pageNext} />
+                </Container>
             </div>
         );
     }
