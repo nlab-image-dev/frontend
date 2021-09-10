@@ -24,8 +24,6 @@ function UserDetail () {
     }
     axios.get("https://nlab-image-dev.herokuapp.com/api/article/", options)
     .then((response) => {
-      console.log(response)
-      console.log(JSON.parse(response.data).articles)
       setArticles(JSON.parse(response.data).articles)
     })
     .catch((err) => {
@@ -34,7 +32,7 @@ function UserDetail () {
   }
   useEffect(() => {
     getInfo();
-  });
+  },[]);
   
   return (
     <div>
