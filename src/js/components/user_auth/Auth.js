@@ -9,7 +9,7 @@ function Auth ({children}) {
   if (!userFetched) {
     return (
       <div>
-        <h1>ログインしてください</h1>
+        <h3>ログインしてください</h3>
         <Button 
           variant="contained" color="primary" component={Link}
           to="/login">
