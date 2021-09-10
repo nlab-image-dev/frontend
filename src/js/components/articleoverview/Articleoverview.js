@@ -13,6 +13,7 @@ class Articleoverview extends Component{
             Article:[
                 {
                     warning:"サーバーからデータを取得できませんでした。",
+                    id: 0,
                     user:{ user_id: 0,username: "NULL" },
                     tags: [],
                     text: "",
@@ -80,15 +81,14 @@ class Articleoverview extends Component{
                 <Container fluid>
                     {this.state.display_articles.map((item,list) =>(
                         <div key={list}>
-                            <Articlelist
-                                id = {item.id}
-                                title = {item.title}
-                                tags = {item.tags}
-                                author = {item.user.username}
-                                intro = {item.text}
-                                date = {Date(item.posted_time)}
-                            />
-                        </div>
+                        <Articlelist
+                            id = {item.id}
+                            title = {item.title}
+                            tags = {item.tags}
+                            author = {item.user.username}
+                            date = {new Date(item.posted_time*1000).toLocaleString()}
+                        />
+                    </div>
                     ))}
                     <PageButton { ...this.state } pageNext={this.pageNext} />
                 </Container>
