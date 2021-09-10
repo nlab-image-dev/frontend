@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState } from 'react';
 import { Form, Button, Container, Row, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from 'react-router-dom';
 import axios from "axios";
 
 function Content(){
@@ -14,6 +15,7 @@ function Content(){
     const [id,Setid] = useState(1);
     const [docomment,Setdocomment] = useState("");
 
+    const[ctotal,Setctotal]=useState({message:"", comments:[]});
     const [comment,Setcomment] = useState("");
     const [cid,Setcid] = useState(1);
     const [cname,Setcname]=useState({user_id:1, username:'ota'});
@@ -22,6 +24,9 @@ function Content(){
     const user = useSelector((state) => state.userReducer.user);
     console.log(user.token)
     console.log(user.username)
+
+    // const search = useLocation().search;
+    // const query2 = new URLSearchParams(search);
 
     const config = {
         headers:{
@@ -33,28 +38,30 @@ function Content(){
     const data2 = {
         };
   
-    useEffect(() => {
-        axios.get("https://nlab-image-dev.herokuapp.com/api/article/", data, config)
-        .then((response)=> {
-            Settotal(JSON.parse(response.data))
-            console.log(JSON.parse(response.data));
-            // Settag(JSON.parse(response.data).tag);
-            // Settitle(JSON.parse(response.data).title);
-            // Settext(JSON.parse(response.data).text);
-            // Settime(JSON.parse(response.data).posted_time);
-            // Setname(JSON.parse(response.data).user.username);
-            // Setid(JSON.parse(response.data).id)
-        }).catch(function (error) {
-            console.log(error);//捕获异常数据
-        })
-    }, [])
+    // useEffect(() => {
+    //     axios.get("https://nlab-image-dev.herokuapp.com/api/article/", data, config)
+    //     .then((response)=> {
+    //         Settotal(JSON.parse(response.data))
+    //         console.log(JSON.parse(response.data));
+    //         // Settag(JSON.parse(response.data).tag);
+    //         // Settitle(JSON.parse(response.data).title);
+    //         // Settext(JSON.parse(response.data).text);
+    //         // Settime(JSON.parse(response.data).posted_time);
+    //         // Setname(JSON.parse(response.data).user.username);
+    //         // Setid(JSON.parse(response.data).id)
+    //     }).catch(function (error) {
+    //         console.log(error);//捕获异常数据
+    //     })
+    // }, [])
     useEffect(() => {
         axios.get("https://nlab-image-dev.herokuapp.com/api/comment/"+id, data2, config)
         .then((response)=> {
-            Setcomment(JSON.parse(response.data2).text);
-            Setcid(JSON.parse(response.data2).id);
+            console.log(JSON.parse(response.data).comments);
+            Setctotal(JSON.parse(response.data))
+            // Setcomment(JSON.parse(response.data2).text);
+            // Setcid(JSON.parse(response.data2).id);
             // Setcname(JSON.parse(response.data2).user.username);
-            Setctime(JSON.parse(response.data2).posted_time);
+            // Setctime(JSON.parse(response.data2).posted_time);
         }).catch(function (error) {
             console.log(error);//捕获异常数据
         })
@@ -62,6 +69,7 @@ function Content(){
 
     const click = (docomment) => {
         return function() {
+        console.log("11")
         const config = {
             headers:{
                 'Content-Type': "application/json",
@@ -69,9 +77,9 @@ function Content(){
             }};
         const datapost = {
             text: docomment
-        }
-        axios.post("https://nlab-image-dev.herokuapp.com/api/comment/"+id, datapost, config)
-        .then((response) => {})
+        };
+        axios.post("https://nlab-image-dev.herokuapp.com/api/comment/"+id+"/", JSON.stringify(datapost), config)
+        .then((response) => {console.log("post:"+response.data)})
         .catch(function (error) {
             console.log(error.response)
           });
@@ -99,7 +107,6 @@ function Content(){
                             </span>
                         )
                     }
-
                     )
                     } 
                 
@@ -107,9 +114,17 @@ function Content(){
 
             <Form.Group controlId="comment">
                 <Form.Label>コメント一覧</Form.Label><br/>
-                <span>
-                    {comment}
-                </span>
+                
+                    {
+                    ctotal.comments.map((te,idx)=>{
+                        return(
+                            <Container>
+                                ユーザー:{te.user.username}<br/>{te.text}<br/>コメント時間：{te.posted_time}
+                            </Container>
+                        )
+                    }
+                    )
+                    } 
             </Form.Group>
 
             <Form.Group controlId="docomment">
