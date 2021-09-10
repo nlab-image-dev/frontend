@@ -15,6 +15,7 @@ function Content(){
     const [time,Settime] =useState(1);
     const [docomment,Setdocomment] = useState("");
 
+
     const[ctotal,Setctotal]=useState({message:"", comments:[]});
     // const [comment,Setcomment] = useState("");
     // const [cid,Setcid] = useState(1);
@@ -70,6 +71,10 @@ function Content(){
 
     const click = (docomment) => {
         return function() {
+            if (user.token == 'test_token'){
+                return(
+        alert('コメントするにはまずログインしてください'))}
+            else{
         console.log("11")
         const config = {
             headers:{
@@ -84,7 +89,7 @@ function Content(){
         .catch(function (error) {
             console.log(error.response)
           });
-        }
+        }}
     };
 
     return(
@@ -102,7 +107,7 @@ function Content(){
                 <Form.Label><b>論文タグ:</b></Form.Label>
                 <span>
                     {tag.map((ta, idx) => {
-                                return(ta.tag_name+"&"
+                                return(ta.tag_name+" "
                                 )}
                     )}
                 </span> 
@@ -144,7 +149,6 @@ function Content(){
             
                 <Form.Group controlId="docomment">
                     <Form.Label><b>コメント欄</b></Form.Label>
-                    {/* {if (user.token == test_token){}} */}
                     {/* <Auth> */}
                     <Form.Control
                     as="textarea" rows ={5}
