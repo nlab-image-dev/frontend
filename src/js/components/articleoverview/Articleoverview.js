@@ -11,6 +11,7 @@ class Articleoverview extends Component{
             Article:[
                 {
                     warning:"サーバーからデータを取得できませんでした。",
+                    id: 0,
                     user:{ user_id: 0,username: "NULL" },
                     tags: [],
                     text: "",
@@ -66,11 +67,11 @@ class Articleoverview extends Component{
                 {this.state.Article.map((item,list) =>(
                     <div key={list}>
                     <Articlelist
+                        id = {item.id}
                         title = {item.title}
                         tags = {item.tags}
                         author = {item.user.username}
-                        intro = {item.text}
-                        date = {Date(item.posted_time)}
+                        date = {new Date(item.posted_time*1000).toLocaleString()}
                     />
                 </div>
                 ))}
