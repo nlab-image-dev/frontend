@@ -28,7 +28,7 @@ function Content(){
 
     const search = useLocation().search;
     const query2 = new URLSearchParams(search);
-    const [id,Setid] = useState((query2.get('id')-1));
+    const [id,Setid] = useState((query2.get('id')));
 
     // const [id,Setid] = useState(1);
     const config = {
@@ -42,14 +42,19 @@ function Content(){
         };
   
     useEffect(() => {
-        axios.get("https://nlab-image-dev.herokuapp.com/api/article/", data, config)
+        const options = {
+            params:{
+                article_id: id,
+            }
+        }
+        axios.get("https://nlab-image-dev.herokuapp.com/api/article/", options)
         .then((response)=> {
-            console.log((JSON.parse(response.data)).articles[id]);
-            Settag((JSON.parse(response.data)).articles[id].tags);
-            Settitle((JSON.parse(response.data)).articles[id].title);
-            Settext((JSON.parse(response.data)).articles[id].text);
-            Settime((JSON.parse(response.data)).articles[id].posted_time);
-            Setname((JSON.parse(response.data)).articles[id].user);
+            console.log((JSON.parse(response.data)));
+            Settag((JSON.parse(response.data)).articles[0].tags);
+            Settitle((JSON.parse(response.data)).articles[0].title);
+            Settext((JSON.parse(response.data)).articles[0].text);
+            Settime((JSON.parse(response.data)).articles[0].posted_time);
+            Setname((JSON.parse(response.data)).articles[0].user);
             // Setid(JSON.parse(response.data).id)
         }).catch(function (error) {
             console.log(error);//捕获异常数据
@@ -84,7 +89,7 @@ function Content(){
         const datapost = {
             text: docomment
         };
-        axios.post("https://nlab-image-dev.herokuapp.com/api/comment/"+id+"/", JSON.stringify(datapost), config)
+        axios.post("https://nlab-image-dev.herokuapp.com/api/comment/"+id+"/", datapost, config)
         .then((response) => {console.log("post:"+response.data)})
         .catch(function (error) {
             console.log(error.response)
