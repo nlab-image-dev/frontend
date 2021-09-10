@@ -7,14 +7,14 @@ export default class HeaderButtons extends React.Component {
   render() {
     return (
       <Container fluid>
-        <Navbar expand="lg" variant="light" bg="light">
-          <Container>
+        <Navbar variant="light" bg="light">
+          <Container fluid>
             <NavbarBrand>記事投稿回覧システム</NavbarBrand>
             <Nav className="me-auto">
               <Button variant="light" component={Link} to="/">
                 トップ
               </Button>
-              <Button variant="light" component={Link}to="/newlinedelete">
+              <Button variant="light" component={Link} to="/newlinedelete">
                 改行削除
               </Button>
               <Button variant="light" component={Link} to="/login">
