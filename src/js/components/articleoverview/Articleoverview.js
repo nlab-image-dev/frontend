@@ -25,7 +25,6 @@ class Articleoverview extends Component{
             pageSize:5, //毎ページ表示できる項目
             goValue:0,  //指定のページにジャンプ
             totalPage:0,//総ページ数
-            offset:0
         }
     }
     //サーバーから記事のデータを取得
@@ -43,14 +42,8 @@ class Articleoverview extends Component{
                     }
                 )
             },
-            this.pageCount()
         );
     };
-    pageCount(){
-        this.setState({
-            totalPage:Math.ceil(this.state.Article.length/this.state.pageSize)
-        })
-    }
 
     //ページ表示
     componentDidUpdate(){

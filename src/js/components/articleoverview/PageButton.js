@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Button, Col, Navbar, Row } from "react-bootstrap";
 
-
 class PageButton extends Component {
 
     constructor(props) {
