@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Col, Navbar, Row } from "react-bootstrap";
 
 
 class PageButton extends Component {
@@ -42,11 +42,15 @@ class PageButton extends Component {
 
     render() {
         return (
-            <div className="change_page">
-                <Button onClick={ this.setUp } >前のページ</Button>
-                <span>{ this.state.pagenum }ページ/ { this.props.totalPage }ページ</span>
-                <Button onClick={ this.setNext }>次のページ</Button>
-            </div>
+            <Navbar fixed="bottom">
+                <Row className="text-center" fixed="bottom">
+                    <Col>
+                        <Button variant="outline-primary" onClick={this.setUp}>前のページ</Button>
+                        <span>{this.state.pagenum}ページ/ {this.props.totalPage}ページ</span>
+                        <Button variant="outline-primary" onClick={this.setNext}>次のページ</Button>
+                    </Col>
+                </Row>
+            </Navbar>
         );
     }
 }

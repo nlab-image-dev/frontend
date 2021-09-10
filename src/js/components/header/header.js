@@ -6,7 +6,7 @@ class Header extends Component{
         return(
             <div>
                 <Navbar expand="lg">
-                    <Navbar.Brand href="#">記事一覧</Navbar.Brand>
+                    <Navbar.Brand>記事一覧</Navbar.Brand>
                 </Navbar>
             </div>
         );
