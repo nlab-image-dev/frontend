@@ -13,6 +13,8 @@ import SubmitPage from "./Pages/SubmitPage";
 import UserPage from "./Pages/UserPage";
 import Login from "./user_auth/Login";
 import Logout from "./user_auth/Logout";
+import content from "./content";
+
 
 export default class DefaulPage extends React.Component {
   render() {
@@ -27,6 +29,7 @@ export default class DefaulPage extends React.Component {
             <Route exact path='/user' component={UserPage}/>
             <Route exact path='/submit' component={SubmitPage}/>
             <Route exact path='/logout' component={Logout}/>
+            <Route exact path='/article' component={content}/>
           </div>
         </Router>
       </div>
