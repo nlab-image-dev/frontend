@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <html>
+  <script>
+    // GitHub Pages での SPA アドレス解決用
+    (function(){
+      const query = window.location.search;
+      if (query.startsWith('?p=')) {
+        const route = decodeURIComponent(query.substr(3));
+        window.history.replaceState(null, null, route);
+      }
+    })();
+  </script>
   <head>
     <meta charset="utf-8">
-    <title>React Tutorials</title>
+    <title>paper collector</title>
     <!-- change this up! http://www.bootstrapcdn.com/bootswatch/ -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

@@ -42,11 +42,11 @@ function UserDetail () {
         {articles.map((item,list) =>(
           <div key={list}>
             <Articlelist
-                title = {item.title}
-                tags = {item.tags}
-                author = {item.user.username}
-                intro = {item.text}
-                date = {Date(item.posted_time)}
+              id = {item.id}
+              title = {item.title}
+              tags = {item.tags}
+              author = {item.user.username}
+              date = {new Date(item.posted_time*1000).toLocaleString()}
             />
           </div>
         ))}
