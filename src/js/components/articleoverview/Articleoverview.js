@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Articlelist from "./Articlelist";
 import PageButton from "./PageButton";
 import Header from "../header/header";
-import ReactPaginate from "react-paginate";
 
 class Articleoverview extends Component{
     constructor(props){
@@ -50,6 +49,7 @@ class Articleoverview extends Component{
             totalPage:Math.ceil(this.state.Article.length/this.state.pageSize)
         })
     }
+
     //ページ表示
     componentDidUpdate(){
         if(this.state.totalPage !== Math.ceil(this.state.Article.length/this.state.pageSize)){
@@ -59,6 +59,7 @@ class Articleoverview extends Component{
             this.pageNext(this.state.goValue)
         }
     }
+
     //ページ分け
     setPage(num){
         this.setState({
@@ -69,17 +70,8 @@ class Articleoverview extends Component{
         console.log(this.state.Article.length)
         this.setPage(num)
     }
+
     //frontに記事データを返す
-    // handlePageClick = (articles) =>{
-        // let selected = articles.current;
-        // let offset = Math.ceil(selected * this.props.pageSize);
-
-        // this.setState({ offset: offset }, () => {
-        //     this.componentDidUpdate();
-        // });
-
-    // };
-
     render(){
         return(
             <div>
@@ -97,17 +89,7 @@ class Articleoverview extends Component{
                 </div>
                 ))}
                 <PageButton { ...this.state } pageNext={this.pageNext} />
-                {/* <ReactPaginate
-                  previousLabel={'previous'}
-                  nextLabel={'next'}
-                  breakLabel={'...'}
-                  breakClassName={'break-me'}
-                  pageCount={this.state.totalPage}
-                  marginPagesDisplayed={2}
-                  onPageChange={this.handlePageClick}
-                  containerClassName={'pagination'}
-                  activeClassName={'active'}
-                /> */}
+                <br/>
             </div>
         );
     }
