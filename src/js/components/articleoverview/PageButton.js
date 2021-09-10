@@ -27,7 +27,7 @@ class PageButton extends Component {
         }
     }
 
-    //次のページ
+    //前のページ
     setUp(){
         if(this.state.pagenum > 1){
             this.setState({
