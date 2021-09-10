@@ -20,7 +20,7 @@ export default class DefaulPage extends React.Component {
   render() {
     return (
       <div>
-        <Router>
+        <Router basename='/frontend'>
           <div>
             <HeaderButtons /><hr/>
             <Route exact path='/' component={HomePage}/>
